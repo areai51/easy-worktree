@@ -1,0 +1,16 @@
+# Source files
+src/
+target/
+.git/
+
+# Development files
+.gitignore
+Cargo.lock
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
