@@ -19,7 +19,6 @@ npm install -g easy-worktree
 ### Prerequisites
 
 - Node.js >= 14
-- Rust and Cargo (install from [rustup.rs](https://rustup.rs/))
 - Git with worktree support
 
 ## Usage
