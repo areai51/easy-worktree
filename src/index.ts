@@ -52,6 +52,15 @@ function createWorktree(branch: string, createBranch: boolean): void {
   const sanitized = sanitizeBranchName(branch);
   const worktreePath = `../${sanitized}`;
 
+  console.log(`Fetching remote branches...`);
+
+  try {
+    execSync('git fetch', { encoding: 'utf-8', stdio: ['pipe', 'pipe', 'pipe'] });
+    console.log('✓ Fetch completed');
+  } catch (error: any) {
+    console.warn('Warning: Failed to fetch remote branches');
+  }
+
   console.log(`Creating worktree at ${worktreePath} for branch ${branch}`);
 
   try {
@@ -67,6 +76,12 @@ function createWorktree(branch: string, createBranch: boolean): void {
     copyEnvFiles(worktreePath);
 
     console.log(`✓ Worktree created successfully at ${worktreePath}`);
+
+    // Change directory to the new worktree
+    const absolutePath = resolve(worktreePath);
+    console.log(`Changing directory to ${absolutePath}`);
+    process.chdir(absolutePath);
+    console.log(`✓ Now in: ${process.cwd()}`);
   } catch (error: any) {
     console.error('Error creating worktree:');
     console.error(error.stderr || error.message);
